@@ -81,10 +81,10 @@ const projectsData = [
     description:
       "Installation of premium engineered European Oak flooring throughout a 2,000 sq ft penthouse. The project involved acoustic soundproofing underlayment required for the apartment block. We also tiled three bathrooms with large-format porcelain slabs, ensuring perfect pattern matching and minimal grout lines.",
     mainImage:
-      "https://images.unsplash.com/photo-1581858726768-758a033ed286?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1615874694520-474822394e73?q=80&w=2700&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1581858726768-758a033ed286?q=80&w=2700&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1620626012053-1c8801997453?q=80&w=2700&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?q=80&w=2700&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?q=80&w=2700&auto=format&fit=crop",
@@ -98,9 +98,9 @@ const projectsData = [
     description:
       "A functional yet elegant home office solution. We created a custom L-shaped desk with integrated cable management and a full wall of library shelving accessible via a rolling ladder. The finish is a hand-painted navy blue with antique brass hardware, creating a sophisticated workspace.",
     mainImage:
-      "https://images.unsplash.com/photo-1595514020180-2724523098f4?q=80&w=2574&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=2700&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1595514020180-2724523098f4?q=80&w=2700&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1558603668-6570496b66f8?q=80&w=2700&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?q=80&w=2700&auto=format&fit=crop",
@@ -572,7 +572,7 @@ export default function App() {
                   <Card
                     title="Kitchen Installation"
                     icon={Hammer}
-                    image="https://images.unsplash.com/photo-1556912173-3db9963f6bee?q=80&w=2690&auto=format&fit=crop"
+                    image="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=2700&auto=format&fit=crop"
                     description="Complete kitchen fitting services including plumbing, electrical integration, and cabinetry assembly for a seamless finish."
                   />
                 </Reveal>
@@ -588,7 +588,7 @@ export default function App() {
                   <Card
                     title="Flooring & Tiling"
                     icon={MapPin} // Placeholder for flooring
-                    image="https://images.unsplash.com/photo-1581858726768-758a033ed286?q=80&w=2670&auto=format&fit=crop"
+                    image="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?q=80&w=2700&auto=format&fit=crop"
                     description="High-end flooring installation including hardwood, laminate, and luxury tiling for kitchens and bathrooms."
                   />
                 </Reveal>
