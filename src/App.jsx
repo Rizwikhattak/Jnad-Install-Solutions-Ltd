@@ -6,6 +6,7 @@ import {
   Phone,
   Mail,
   Instagram,
+  Facebook,
   MapPin,
   Hammer,
   Ruler,
@@ -40,6 +41,8 @@ import ServiceFlooring from "./assets/service-flooring.jpg";
 import ServiceBathroom from "./assets/service-bathroom.jpg";
 import ServiceExtension from "./assets/service-extension.jpg";
 import ServiceRefurbishment from "./assets/service-refurbishment.jpg";
+import emailjs from "@emailjs/browser";
+
 /* Jnad Install Solutions Ltd
    Theme: Dark Luxury (Slate 950 background with Amber 500 accents)
    Architecture: Single Page App with State-based Routing for Project Details
@@ -375,6 +378,14 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState(null); // State for handling "Pages"
   const [openService, setOpenService] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    service: "",
+    message: "",
+  });
+
   // Handle Scroll Effect for Navbar
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -432,6 +443,54 @@ export default function App() {
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const templateParams = {
+      full_name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      service: formData.service,
+      message: formData.message,
+      time: new Date().toLocaleString(),
+    };
+
+    emailjs
+      .send(
+        "service_mln996k",
+        "template_3h2hgib",
+        templateParams,
+        "f3FpQqx36qb-Zbvfb"
+      )
+      .then(
+        (response) => {
+          console.log(
+            "Email sent successfully!",
+            response.status,
+            response.text
+          );
+          alert("Message sent successfully!");
+
+          // Reset form
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            service: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error("Email failed to send:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      );
+  };
 
   const toggleService = (id) => {
     setOpenService(openService === id ? null : id);
@@ -1038,10 +1097,36 @@ export default function App() {
                       </p>
                       <div className="flex gap-4">
                         <a
-                          href="#"
+                          href="https://www.instagram.com/jnad_install_solution_ltd?igsh=MXE2bTd4MmZvZDIwcg%3D%3D&utm_source=qr"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="p-3 bg-slate-800 rounded-lg hover:bg-amber-500 hover:text-slate-900 transition-colors"
                         >
                           <Instagram size={24} />
+                        </a>
+                        <a
+                          href="https://www.facebook.com/share/17uNokXdaV/?mibextid=wwXIfr"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 bg-slate-800 rounded-lg hover:bg-amber-500 hover:text-slate-900 transition-colors"
+                        >
+                          <Facebook size={24} />
+                        </a>
+                        <a
+                          href="https://wa.me/447944972464"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 bg-slate-800 rounded-lg hover:bg-amber-500 hover:text-slate-900 transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                          </svg>
                         </a>
                       </div>
                     </div>
@@ -1050,10 +1135,7 @@ export default function App() {
 
                 {/* Form */}
                 <Reveal className="delay-200">
-                  <form
-                    className="space-y-6"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-slate-300">
@@ -1061,8 +1143,11 @@ export default function App() {
                         </label>
                         <input
                           type="text"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-slate-100 focus:outline-none focus:border-amber-500 transition-colors"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleChange}
                           placeholder="John"
+                          className="w-full bg-slate-900 border border-slate-800 rounded-md p-3"
                         />
                       </div>
                       <div className="space-y-2">
@@ -1071,8 +1156,11 @@ export default function App() {
                         </label>
                         <input
                           type="text"
-                          className="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-slate-100 focus:outline-none focus:border-amber-500 transition-colors"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleChange}
                           placeholder="Doe"
+                          className="w-full bg-slate-900 border border-slate-800 rounded-md p-3"
                         />
                       </div>
                     </div>
@@ -1083,8 +1171,11 @@ export default function App() {
                       </label>
                       <input
                         type="email"
-                        className="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-slate-100 focus:outline-none focus:border-amber-500 transition-colors"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="john@example.com"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-md p-3"
                       />
                     </div>
 
@@ -1092,11 +1183,18 @@ export default function App() {
                       <label className="text-sm font-medium text-slate-300">
                         Service Interest
                       </label>
-                      <select className="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-slate-100 focus:outline-none focus:border-amber-500 transition-colors">
-                        <option>Kitchen Installation</option>
-                        <option>Wardrobes / Joinery</option>
-                        <option>Flooring</option>
-                        <option>Other</option>
+                      <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-md p-3"
+                        required
+                      >
+                        <option value="">Select a service</option>
+                        <option value="kitchen">Kitchen Installation</option>
+                        <option value="joinery">Wardrobes / Joinery</option>
+                        <option value="flooring">Flooring</option>
+                        <option value="other">Other</option>
                       </select>
                     </div>
 
@@ -1105,10 +1203,13 @@ export default function App() {
                         Message
                       </label>
                       <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         rows={4}
-                        className="w-full bg-slate-900 border border-slate-800 rounded-md p-3 text-slate-100 focus:outline-none focus:border-amber-500 transition-colors"
                         placeholder="Tell us about your project..."
-                      ></textarea>
+                        className="w-full bg-slate-900 border border-slate-800 rounded-md p-3"
+                      />
                     </div>
 
                     <Button className="w-full h-12 text-base font-bold">
@@ -1134,8 +1235,7 @@ export default function App() {
             </span>
           </div>
           <p className="text-slate-500 text-sm mb-8">
-            © {new Date().getFullYear()} Jnad Install Solutions Ltd. All rights
-            reserved. <br />
+            © 2020 Jnad Install Solutions Ltd. All rights reserved. <br />
             Registered in England & Wales.
           </p>
           <div className="flex justify-center gap-8 text-slate-400 text-sm">
